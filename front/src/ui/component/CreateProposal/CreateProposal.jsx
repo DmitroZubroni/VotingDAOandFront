@@ -9,18 +9,18 @@ const CreateProposal = () => {
     const handleSubmit = async e => {
         e.preventDefault();
         try {
-            const delay = (e.target[0].value);
-            const period = (e.target[1].value);
+            const delay = e.target[0].value;
+            const period = e.target[1].value;
             const targets = e.target[2].value;
             const amount = e.target[3].value;
-            const proposeType = e.target[4].value;
-            const quorumType = e.target[5].value;
+            const quorumType = e.target[4].value;
+            const proposeType = e.target[5].value;
             const description = e.target[6].value;
             console.log({
-                delay, period, targets, amount, proposeType, quorumType,  wallet, description
+                delay, period, targets, amount, proposeType, quorumType, description, wallet
             });
             await ServiceVoting.createProposal(
-                delay, period, targets, amount, proposeType, quorumType,  wallet, description, wallet
+                delay, period, targets, amount, proposeType, quorumType, description, wallet
             );
             alert('Предложение создано');
         } catch (err) {
@@ -54,12 +54,12 @@ const CreateProposal = () => {
             </FormGroup>
 
             <FormGroup>
-                <FormLabel column={2}>Тип (A–F)</FormLabel>
+                <FormLabel column={2}> Механизм кворума (0=Простое, 1=Супер, 2=Взвеш.)</FormLabel>
                 <FormControl/>
             </FormGroup>
 
             <FormGroup className="mb-3">
-                <FormLabel column={3}>Механизм кворума (0=Простое, 1=Супер, 2=Взвеш.)</FormLabel>
+                <FormLabel column={3}>Type proposal</FormLabel>
                 <FormControl />
             </FormGroup>
 

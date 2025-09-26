@@ -9,7 +9,7 @@ const CastVote = () => {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        const proposalID = Number(e.target[0].value);
+        const proposalID = e.target[0].value;
         const support = e.target[1].checked;
         const amount = e.target[2].value * 10 ** 12;
         await ServiceVoting.castVote(proposalID, support, amount, wallet);

@@ -10,7 +10,7 @@ const DelegateRTK = () => {
     const handleSubmit = async e => {
         e.preventDefault();
         const to = e.target[0].value;
-        const  amount = Number(e.target[1].value);
+        const  amount = e.target[1].value;
         await ServiceVoting.delegateRTK(to, amount ,wallet);
     };
 
@@ -21,8 +21,14 @@ const DelegateRTK = () => {
                 <FormLabel column={1}>
                     кому вы дилигируете
                 </FormLabel>
-
                 <FormControl placeholder="адрес кому делегируете"/>
+            </FormGroup>
+
+            <FormGroup>
+                <FormLabel column={1}>
+                        количество
+                </FormLabel>
+                <FormControl placeholder="100" type={'number'} min={1}/>
             </FormGroup>
 
 

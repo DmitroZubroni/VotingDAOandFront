@@ -43,7 +43,7 @@ const Propsals = ({proposalID}) => {
 
             <FormGroup>
                 <FormLabel column={1}>
-                    создатель голосования {propsal.proposer.toString() || ""}
+                    создатель голосования {propsal.proposer?.toString() || ""}
                 </FormLabel>
             </FormGroup>
 
@@ -61,32 +61,38 @@ const Propsals = ({proposalID}) => {
 
             <FormGroup>
                 <FormLabel column={1}>
-                    время начала {new Date(Number(propsal.voteEnd) * 1000).toLocaleString() || 0}
+                    количество {propsal.description?.toString() || "" }
+                </FormLabel>
+            </FormGroup>
+
+            <FormGroup>
+                <FormLabel column={1}>
+                    время начала {new Date(Number(propsal.voteEnd) * 1000)?.toLocaleString() || 0}
                 </FormLabel>
             </FormGroup>
 
 
             <FormGroup>
                 <FormLabel column={1}>
-                    время окончание {new Date(Number(propsal.voteEnd) * 1000).toLocaleString() || 0}
+                    время окончание {new Date(Number(propsal.voteEnd) * 1000)?.toLocaleString() || 0}
                 </FormLabel>
             </FormGroup>
 
             <FormGroup>
                 <FormLabel column={1}>
-                    тип голосования {propsal.proposeType.toString() || 0}
+                    тип голосования {propsal.proposeType?.toString() || 0}
                 </FormLabel>
             </FormGroup>
 
             <FormGroup>
                 <FormLabel column={1}>
-                    тип достижения кворума  {propsal.quorumType.toString() || 0}
+                    тип достижения кворума  {propsal.quorumType?.toString() || 0}
                 </FormLabel>
             </FormGroup>
 
             <FormGroup>
                 <FormLabel column={1}>
-                    статус {propsal.voteStatus.toString()  || 0}
+                    статус {propsal.voteStatus?.toString()  || 0}
                 </FormLabel>
             </FormGroup>
 

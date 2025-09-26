@@ -4,7 +4,7 @@ import abi from "./abi.json";
 class ServiceVoting {
 
     web3 = new Web3(window.ethereum);
-    contractAddess = "0x988842ec93B8EFb991D99449F2B223e554F2dec7";
+    contractAddess = "0x6F144f68A891Bb527B517c23C3A5f5a813E81D25";
     contract = new this.web3.eth.Contract(abi, this.contractAddess);
 
     async buyToken(amount, valueAmount, wallet){
@@ -14,8 +14,8 @@ class ServiceVoting {
     async delegateRTK(account, wallet){
         await this.contract.methods.delegateRTK(account).send({from: wallet});
     }
-    async createProposal( delay, period, targets, amount, proposeType, quorumType,  wallet, description) {
-        await this.contract.methods.createProposal( delay, period, targets, amount, proposeType, quorumType,  wallet, description).send({from: wallet});
+    async createProposal( delay, period, targets, amount, proposeType, quorumType,  description, wallet) {
+        await this.contract.methods.createProposal( delay, period, targets, amount, proposeType, quorumType, description).send({from: wallet});
     }
 
     async castVote(proposalId, support, amount, wallet){

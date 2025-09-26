@@ -63,7 +63,7 @@ contract Voting is
 
     // общие переменные
     uint public delay = 0; // задержка перед голосованием
-    uint period = 12; // длительность голосования
+    uint period = 12000; // длительность голосования
 
     uint profiPower = 3; // сила профи
     uint rtkPower = 6; // сила ртк
@@ -202,7 +202,7 @@ contract Voting is
             unicode"Ошибка в 'DAO._quorumReached' QuorumTypes doesn't exist"
         );
     }
-
+     
     // создать голосование
     function createProposal(
         uint _delay,
@@ -235,7 +235,7 @@ contract Voting is
         } else if (proposalType == ProposalType.C) {
             // добавление участника в дао
             require(
-                quorumType == QuorumType.SimpleMajority &&
+                quorumType == QuorumType.SimpleMajority ||
                     quorumType == QuorumType.SuperMajority,
                 unicode"данный способ голосования не доступен для подобного типа голосования"
             );
@@ -247,7 +247,7 @@ contract Voting is
         } else if (proposalType == ProposalType.D) {
             // удаления участника из дао
             require(
-                quorumType == QuorumType.SimpleMajority &&
+                quorumType == QuorumType.SimpleMajority ||
                     quorumType == QuorumType.SuperMajority,
                 unicode"данный способ голосования не доступен для подобного типа голосования"
             );
@@ -259,27 +259,28 @@ contract Voting is
         } else if (proposalType == ProposalType.E) {
             //изменения силы профи
             require(
-                quorumType == QuorumType.SimpleMajority &&
+                quorumType == QuorumType.SimpleMajority ||
                     quorumType == QuorumType.SuperMajority,
                 unicode"данный способ голосования не доступен для подобного типа голосования"
             );
             target[0] = targets;
             value[0] = amount;
             calldatas[0] = abi.encodeWithSignature(
-                "setProfiPower(uint), amount"
+                "setProfiPower(uint256), amount"
             );
         } else if (proposalType == ProposalType.F) {
             //изменения силы ртк
             require(
-                quorumType == QuorumType.SimpleMajority &&
+                quorumType == QuorumType.SimpleMajority ||
                     quorumType == QuorumType.SuperMajority,
                 unicode"данный способ голосования не доступен для подобного типа голосования"
             );
             target[0] = targets;
             value[0] = amount;
-            calldatas[0] = abi.encodeWithSignature("setRTKPower(uint), amount");
+            calldatas[0] = abi.encodeWithSignature("setRTKPower(uint256), amount");
         }
-
+        
+        
         uint ID = super.propose(target, value, calldatas, description);
         proposalIds.push(ID);
         proposalMapping[ID] = ProposalLib({
@@ -289,8 +290,8 @@ contract Voting is
             values: value,
             calldatas: calldatas,
             description: description,
-            voteStart: block.timestamp + delay,
-            voteEnd: block.timestamp + delay + period,
+            voteStart: block.timestamp + _delay,
+            voteEnd: block.timestamp + _delay + _period,
             quorumType: quorumType,
             proposalType: proposalType,
             voteStatus: VoteStatus.notAccepted
