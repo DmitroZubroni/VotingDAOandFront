@@ -11,9 +11,6 @@ class ServiceVoting {
         await this.contract.methods.buyToken(amount).send({from: wallet, value: valueAmount});
     }
 
-    async delegateRTK(accont, wallet){
-        await this.contract.methods.delegateRTK(accont).send({from: wallet});
-    }
     async createProposal( delay, period, targets, amount, proposeType, quorumType,  wallet, description) {
         await this.contract.methods.createProposal( delay, period, targets, amount, proposeType, quorumType,  wallet, description).send({from: wallet});
     }
