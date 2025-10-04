@@ -11,8 +11,8 @@ class ServiceVoting {
         await this.contract.methods.buyToken(amount).send({from: wallet, value: valueAmount});
     }
 
-    async createProposal( delay, period, targets, amount, proposeType, quorumType,  wallet, description) {
-        await this.contract.methods.createProposal( delay, period, targets, amount, proposeType, quorumType,  wallet, description).send({from: wallet});
+    async createProposal( delay, period, targets, amount, quorumType, proposeType,   wallet, description) {
+        await this.contract.methods.createProposal( delay, period, targets, amount, quorumType, proposeType, wallet, description).send({from: wallet});
     }
 
     async castVote(proposalId, support, amount, wallet){
